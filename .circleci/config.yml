@@ -1,0 +1,64 @@
+version: 2
+jobs:
+  test:
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
+      - run:
+          name: docker-compose build
+          command: docker-compose build
+      - run:
+          name: docker-compose up
+          command: docker-compose up -d
+      - run:
+          name: sleep for waiting launch db
+          command: sleep 1
+      - run:
+          name: rails db:create and db:migrate
+          command: docker-compose run web rails db:create db:migrate
+      - run:
+          name: rspec
+          command: docker-compose run web rspec
+      - run:
+          name: docker-compose down
+          command: docker-compose down
+
+  deploy:
+    working_directory: ~/deploy
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
+      - run:
+          name: Build docker image
+          command: docker build --rm=false -t registry.heroku.com/${HEROKU_APP_NAME}/web .
+      - run:
+          name: Setup Heroku command
+          command: bash .circleci/setup_heroku.sh
+      - run:
+          name: Execute Heroku maintenance on
+          command: heroku maintenance:on --app ${HEROKU_APP_NAME}
+      - run:
+          name: Push container to registry.heroku.com
+          command: |
+            docker login --username=_ --password=$HEROKU_AUTH_TOKEN registry.heroku.com
+            docker push registry.heroku.com/${HEROKU_APP_NAME}/web
+      - run:
+          name: Execute Heroku db migrate
+          command: heroku run rails db:migrate --app ${HEROKU_APP_NAME}
+      - run:
+          name: Execut Heroku maintenance off
+          command: heroku maintenance:off --app ${HEROKU_APP_NAME}
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
