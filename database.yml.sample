@@ -20,14 +20,18 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV.fetch('DATABASE_HOST') { 'localhost' } %>
-  port: <%= ENV.fetch('DATABASE_PORT') { 5432 } %>
-  username: <%= ENV.fetch('DATABASE_USER') { 'root' } %>
-  password: <%= ENV.fetch('DATABASE_PASSWORD') { 'password' } %>
+  # host: <%= ENV.fetch('DATABASE_HOST') { 'localhost' } %>
+  # port: <%= ENV.fetch('DATABASE_PORT') { 5432 } %>
+  # username: <%= ENV.fetch('DATABASE_USER') { 'root' } %>
+  # password: <%= ENV.fetch('DATABASE_PASSWORD') { 'password' } %>
 
 development:
   <<: *default
   database: rails_app_development
+  host: db
+  username: postgres
+  password:
+  # url: <%= ENV['DATABASE_URL'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -62,6 +66,10 @@ development:
 test:
   <<: *default
   database: rails_app_test
+  host: db
+  username: postgres
+  password:
+  # url: <%= ENV['DATABASE_URL'] %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -84,6 +92,7 @@ test:
 #
 production:
   <<: *default
-  database: rails_app_production
-  username: rails_app
-  password: <%= ENV['RAILS_APP_DATABASE_PASSWORD'] %>
+  # database: rails_app_production
+  # username: rails_app
+  # password: <%= ENV['RAILS_APP_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
