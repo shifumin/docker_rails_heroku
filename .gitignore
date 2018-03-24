@@ -47,4 +47,4 @@ bower.json
 
 # add
 .envrc
-config/secrets.yml
+# config/secrets.yml
