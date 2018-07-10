@@ -11,6 +11,8 @@ services:
       - .:/rails_app
     depends_on:
       - db
+    environment:
+      EDITOR: vim
   db:
     image: postgres:10.4
     ports:

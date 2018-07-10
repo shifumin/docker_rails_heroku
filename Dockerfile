@@ -6,6 +6,7 @@ RUN apt-get update -qq && \
                        apt-transport-https \
                        libpq-dev \
                        postgresql-client \
+                       vim \
                        --no-install-recommends
 
 # node
