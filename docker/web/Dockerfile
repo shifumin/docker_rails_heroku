@@ -30,5 +30,4 @@ RUN bundle install --jobs=4 --no-cache
 COPY . /rails_app
 
 EXPOSE 3000
-RUN RAILS_ENV=production rails assets:precompile
 CMD ["rails", "s", "-b", "0.0.0.0"]
