@@ -65,9 +65,9 @@ And, register the GitHub repository on the CircleCI application.
 ### CircleCI Environment Variables
 
 ```shell
-HEROKU_AUTH_TOKEN=`heroku auth:token`
+HEROKU_AUTH_TOKEN=`heroku authorizations:create`
 HEROKU_LOGIN='your_mail@address.com'
-HEROKU_API_KEY=`heroku auth:token`
+HEROKU_API_KEY=`heroku authorizations:create`
 HEROKU_APP_NAME='your_herokuapp_name'
 ```
 
