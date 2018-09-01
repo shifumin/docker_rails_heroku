@@ -62,6 +62,11 @@ $ docker-compose build  # or `docker-compose up --build`
 First, add the following environment variables to the build on CircleCI application.  
 And, register the GitHub repository on the CircleCI application.
 
+```shell
+# Put Dockerfile in app root to use Dockerfile with Heroku deploy
+$ cp -i docker/web/Dockerfile .
+```
+
 ### CircleCI Environment Variables
 
 ```shell
@@ -69,6 +74,8 @@ HEROKU_AUTH_TOKEN=`heroku authorizations:create`
 HEROKU_LOGIN='your_mail@address.com'
 HEROKU_API_KEY=`heroku authorizations:create`
 HEROKU_APP_NAME='your_herokuapp_name'
+# for development environment
+HEROKU_APP_NAME_DEV='your_herokuapp_name_for_development'
 ```
 
 Second, add the following environment valiables for Heroku on console.
