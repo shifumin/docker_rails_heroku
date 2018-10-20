@@ -3,7 +3,6 @@ services:
   web:
     build:
       context: .
-      dockerfile: ./docker/web/Dockerfile
     tty: true
     stdin_open: true
     ports:
