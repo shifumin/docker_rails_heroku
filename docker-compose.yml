@@ -15,7 +15,7 @@ services:
     environment:
       EDITOR: vim
   db:
-    image: postgres:10.5
+    image: postgres:11.1
     ports:
       - '5432:5432'
     volumes:
