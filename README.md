@@ -22,33 +22,35 @@ $ cd docker_rails_heroku
 
 ```shell
 # rails new
+# Since .gitignore has been prepared in advance, add '--skip-git' option.
 # For installing RSpec later, add '--skip-test' option.
-$ docker-compose run --rm web rails new . --database=postgresql --skip-bundle --skip-test
+$ docker-compose run --rm app rails new . --database=postgresql --skip-git --skip-test --skip-bundle
 
 # After `rails new`, you need to replace 'config/database.yml'
 $ cp database.yml.sample config/database.yml
 
 # Add 'rspec-rails' gem to Gemfile and run 'bundle install'
 $ vim Gemfile
-$ docker-compose run --rm web bundle install
+$ docker-compose run --rm app bundle install
 
 # Install RSpec
-$ docker-compose run --rm web rails g rspec:install
+$ docker-compose run --rm app rails g rspec:install
 
 # rails g
 # the following is examples
-$ docker-compose run --rm web rails g controller welcome index
-$ docker-compose run --rm web rails g model user name:string
+$ docker-compose run --rm app rails g controller welcome index
+$ docker-compose run --rm app rails g model user name:string
 
 # rake db
-$ docker-compose run --rm web rails db:create db:migrate
+$ docker-compose run --rm app rails db:create db:migrate
 
 # rspec
-$ docker-compose run --rm web rspec
+$ docker-compose run --rm app rspec
 
 # create and start containers
 # boot the app (= `rails s`)
 $ docker-compose up
+# or docker-compose run --rm --service-ports app
 
 # stop and remove containers
 $ docker-compose down
@@ -87,7 +89,7 @@ $ heroku config:add RACK_ENV=production
 $ heroku config:add RAILS_SERVE_STATIC_FILES=enabled
 $ heroku config:add RAILS_LOG_TO_STDOUT=enabled
 # heroku config:add LANG=en_US.UTF-8
-$ heroku config:add SECRET_KEY_BASE=$(docker-compose run --rm web rails secret)
+$ heroku config:add SECRET_KEY_BASE=$(docker-compose run --rm app rails secret)
 ```
 
 Next, set up Heroku settings.
