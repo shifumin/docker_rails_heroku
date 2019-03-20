@@ -1,4 +1,4 @@
-FROM ruby:2.6.1-alpine
+FROM ruby:2.6.2-alpine
 ENV LANG C.UTF-8
 
 RUN mkdir /app
