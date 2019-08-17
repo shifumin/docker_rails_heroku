@@ -4,13 +4,13 @@ Includes automatic test (RSpec) execution and deployment environment using Circl
 
 ## Stack
 - Rails 5.2.3 (+ Ruby 2.6.3)
-- PostgreSQL 11.3
+- PostgreSQL 11.5
 
 ## Readying
 
 ```shell
 $ docker pull ruby:2.6.3-alpine
-$ docker pull postgres:11.3
+$ docker pull postgres:11.5
 ```
 
 ```shell
