@@ -16,10 +16,10 @@ jobs:
           command: sleep 1
       - run:
           name: rails db:create and db:migrate
-          command: docker-compose run web rails db:create db:migrate
+          command: docker-compose run app rails db:create db:migrate
       - run:
           name: rspec
-          command: docker-compose run web rspec
+          command: docker-compose run app rspec
       - run:
           name: docker-compose down
           command: docker-compose down
