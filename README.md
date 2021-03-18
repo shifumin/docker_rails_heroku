@@ -3,14 +3,14 @@ Template for building Rails application environment with Docker on Heroku.
 Includes automatic test (RSpec) execution and deployment environment using CircleCI.
 
 ## Stack
-- Rails 6.0.2 (+ Ruby 2.7.1)
-- PostgreSQL 12.2
+- Rails 6.1.3 (+ Ruby 3.0.0)
+- PostgreSQL 13.2
 
 ## Readying
 
 ```shell
-$ docker pull ruby:2.7.1-alpine
-$ docker pull postgres:12.2-apline
+$ docker pull ruby:3.0.0-alpine
+$ docker pull postgres:13.2-alpine
 ```
 
 ```shell
